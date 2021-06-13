@@ -14,33 +14,52 @@ export class Main extends Component {
       cityName: "",
       citydetails: {},
       showdetails: false,
+      err:false
+    
+
     };
+
   }
 
+
+
   getNameCity = (e) => {
+  
+    
     this.setState({
       cityName: e.target.value,
     });
-  };
+  }
 
   getcitydetails = async (e) => {
     e.preventDefault();
+    try{
     const request = await axios.get(
       `https://us1.locationiq.com/v1/search.php?key=pk.8331df13fc3aba45408910f6a8439ada&city=${this.state.cityName}&format=json`
     );
-
+  
     console.log(request);
     this.setState({
       citydetails: request.data[0],
       showdetails: true,
+      err:false
     });
+  }catch(error){
+    this.setState({
+      err: true,
+      showdetails: false
+
+    });
+  }
   };
 
   render() {
+   
     return (
       <div>
         <Container style={{ marginTop: "50px" }}>
           <h2>City Explorer</h2>
+          
           <Form onSubmit={this.getcitydetails}>
             <Form.Group className="mb-3">
               <Form.Label>City Name</Form.Label>
@@ -58,6 +77,9 @@ export class Main extends Component {
               Explore!
             </Button>
           </Form>
+  
+ 
+  
         </Container>
 
         {this.state.showdetails && (
@@ -71,6 +93,18 @@ export class Main extends Component {
                 <Card.Title> {this.state.citydetails.display_name}</Card.Title>
                 <Card.Text>latitude : {this.state.citydetails.lat}</Card.Text>
                 <Card.Text>longitude : {this.state.citydetails.lon}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Container>
+        )}
+         {this.state.err && (
+          <Container style={{ marginTop: "50px" }}>
+            <Card style={{ width: "18rem" }}>
+              
+              <Card.Body>
+                <Card.Title>no title </Card.Title>
+                <Card.Text>latitude : error</Card.Text>
+                <Card.Text>longitude : error</Card.Text>
               </Card.Body>
             </Card>
           </Container>
