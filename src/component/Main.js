@@ -65,7 +65,7 @@ export class Main extends Component {
             <Card style={{ width: "18rem" }}>
               <Card.Img
                 variant="top"
-                src={`https://maps.locationiq.com/v3/staticmap?key=pk.8331df13fc3aba45408910f6a8439ada&center=${this.state.citydetails.lat},${this.state.citydetails.lon}&zoom=15`}
+                src={`https://maps.locationiq.com/v3/staticmap?key=pk.8331df13fc3aba45408910f6a8439ada&center=${this.state.citydetails.lat},${this.state.citydetails.lon}&zoom=12`}
               />
               <Card.Body>
                 <Card.Title> {this.state.citydetails.display_name}</Card.Title>
