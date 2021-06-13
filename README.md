@@ -35,3 +35,14 @@
 ## Pair programming 
 * Navigator: Yusuf Abu Jalboush 
 * Driver : Yazan Ahmad
+
+
+Name of feature: ____________location____________________
+
+Estimate of time needed to complete: _1hour____
+
+Start time: ___9pm__
+
+Finish time: ___10pm__
+
+Actual time needed to complete: ____1 hour_
