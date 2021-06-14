@@ -47,9 +47,11 @@ export class Main extends Component {
   }catch(error){
     this.setState({
       err: true,
-      showdetails: false
+      showdetails: false,
 
     });
+    alert("you have error 404");
+
   }
   };
 
