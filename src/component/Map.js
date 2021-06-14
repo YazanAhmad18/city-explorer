@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
+import Alert from 'react-bootstrap/Alert'
 
 
 export class Map extends Component {
@@ -19,6 +20,19 @@ export class Map extends Component {
                 <Card.Text>longitude : {this.props.citydetails.lon}</Card.Text>
               </Card.Body>
             </Card>
+            <Alert variant="danger" style={{ marginTop: "50px" }}>
+                        <Alert.Heading>Description</Alert.Heading>
+                        {
+                            this.props.weatherData.map(value => {
+                                return (
+                                    <p>
+                                        {value.weather.description}
+                                    </p>
+                                )
+                            })
+                        }
+                    </Alert>
+
           </Container>
             </div>
         )
