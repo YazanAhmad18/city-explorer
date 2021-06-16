@@ -56,3 +56,13 @@ Start time: ___8pm__
 Finish time: ___12am__
 
 Actual time needed to complete: ____4hour_
+
+Name of feature: ____________movie____________________
+
+Estimate of time needed to complete: _2hour____
+
+Start time: ___8pm__
+
+Finish time: ___10pm__
+
+Actual time needed to complete: ____2hour_
