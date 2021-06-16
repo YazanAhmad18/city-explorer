@@ -47,7 +47,7 @@ Finish time: ___10pm__
 
 Actual time needed to complete: ____1 hour_
 
-Name of feature: ____________location____________________
+Name of feature: ____________weather____________________
 
 Estimate of time needed to complete: _4hour____
 
