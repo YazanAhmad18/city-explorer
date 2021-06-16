@@ -26,7 +26,9 @@ export class Map extends Component {
                             this.props.weatherData.map(value => {
                                 return (
                                     <p>
-                                        {value.weather.description}
+                                        {value.descriptionWeather}
+                                        {value.dateWeather}
+
                                     </p>
                                 )
                             })

@@ -38,7 +38,7 @@ export class App extends Component {
         citydetails: request.data[0],
         showdetails: true,
         err: false,
-        weatherData: myRes2.data.data,
+        weatherData: myRes2.data,
 
       });
     } catch (error) {
