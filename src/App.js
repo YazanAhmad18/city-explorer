@@ -1,67 +1,106 @@
-import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./component/Header";
-import Main from "./component/Main";
-import AlertMessage from "./component/AlertMessage";
-import axios from "axios";
-import Map from "./component/Map";
+import React, { Component } from 'react'
+import axios from 'axios';
+
+
+import Header from './component/Header';
+import Main from './component/Main';
+import AlertMessage from './component/AlertMessage';
+import Map from './component/Map';
+import Weather from './component/Weather';
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      cityName: "",
-      citydetails: {},
-      showdetails: false,
-      err: false,
+      cityName: '',
+      cityInfo: {},
+      lat: '',
+      lon: '',
+      showInfo: false,
+      serError: false,
+      errorMessage: '',
       weatherData: '',
-
-    };
-  }
-
-  getNameCity = (e) => {
-    this.setState({
-      cityName: e.target.value,
-    });
-  };
-
-  getcitydetails = async (e) => {
-    e.preventDefault();
-    try {
-      const request = await axios.get(
-        `https://us1.locationiq.com/v1/search.php?key=pk.8331df13fc3aba45408910f6a8439ada&city=${this.state.cityName}&format=json`
-      );
-      const myRes2 = await axios.get(`${process.env.REACT_APP_URL}/weather`);
-
-      console.log(request);
-      this.setState({
-        citydetails: request.data[0],
-        showdetails: true,
-        err: false,
-        weatherData: myRes2.data,
-
-      });
-    } catch (error) {
-      this.setState({
-        err: true,
-        showdetails: false,
-      });
     }
   };
 
+  getNameCity = (e) => {
+
+    this.setState({
+      cityName: e.target.value
+    });
+
+  }
+
+  getCityInfo = async (e) => {
+    e.preventDefault();
+
+
+    try {
+
+      await axios.get(`https://us1.locationiq.com/v1/search.php?key=pk.7733cdd4499bcd98592de57639a159af&city=${this.state.cityName}&format=json`).then(axiosReq => {
+
+        this.setState({
+          cityInfo: axiosReq.data[0],
+          lat: axiosReq.data[0].lat,
+          lon: axiosReq.data[0].lon,
+        })
+      })
+
+      axios.get(`${process.env.REACT_APP_URL}/weather?lat=${this.state.lat}&lon=${this.state.lon}`).then(resWeather => {
+        this.setState({
+          showInfo: true,
+          serError: false,
+          errorMessage: '',
+          weatherData: resWeather.data
+        })
+      })
+
+    } catch (error) {
+      this.setState({
+        serError: true,
+        showInfo: false,
+        errorMessage: error
+      });
+    }
+
+  }
+
+
   render() {
     return (
-      <div>
+      <>
+
         <Header />
+
         <Main
           getNameCity={this.getNameCity}
-          getcitydetails={this.getcitydetails}
+          getCityInfo={this.getCityInfo}
         />
-        {this.state.showdetails && <Map citydetails={this.state.citydetails}  weatherData={this.state.weatherData}/>}
-        {this.state.err && <AlertMessage />}
-      </div>
-    );
+
+        {
+          (this.state.showInfo) &&
+          <>
+            <Map
+              cityInfo={this.state.cityInfo}
+            // weatherData={this.state.weatherData}
+            />
+            <Weather
+              weatherData={this.state.weatherData}
+            />
+          </>
+        }
+
+        {
+          this.state.serError &&
+          <AlertMessage />
+        }
+      </>
+    )
   }
 }
 
-export default App;
+export default App
