@@ -66,3 +66,14 @@ Start time: ___8pm__
 Finish time: ___10pm__
 
 Actual time needed to complete: ____2hour_
+
+Name of feature: Advanced Topics
+
+
+Estimate of time needed to complete: __3___
+
+Start time: ___2pm__
+
+Finish time: __5pm___
+
+Actual time needed to complete: __3___
